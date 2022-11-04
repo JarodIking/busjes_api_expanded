@@ -15,7 +15,14 @@ return new class extends Migration
     {
         Schema::create('inventory_order', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('inventory_id');
+            $table->unsignedBigInteger('order_id');
             $table->timestamps();
+
+            //foreign key assignments
+            $table->foreign('order_id')->references('id')->on('order');
+            $table->foreign('inventory_id')->references('id')->on('inventory');
+
         });
     }
 
@@ -26,6 +33,8 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('inventory_order');
+        Schema::enableForeignKeyConstraints();
     }
 };

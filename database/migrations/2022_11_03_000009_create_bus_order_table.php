@@ -15,7 +15,18 @@ return new class extends Migration
     {
         Schema::create('bus_orders', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('bus_id');
+            $table->double('fuel_amount');
+            $table->double('days');
+            $table->double('total_price');
+
             $table->timestamps();
+
+            //foreign key assignments
+            $table->foreign('order_id')->references('id')->on('order');
+            $table->foreign('bus_id')->references('id')->on('bus');
+
         });
     }
 
@@ -26,6 +37,8 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('bus_orders');
+        Schema::enableForeignKeyConstraints();
     }
 };

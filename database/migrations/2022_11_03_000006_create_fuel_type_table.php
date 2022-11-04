@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('fuel_type', function (Blueprint $table) {
+        Schema::create('fueltype', function (Blueprint $table) {
             $table->id();
+            $table->string("name", 30);
+            $table->double("price");
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fuel_type');
+        Schema::dropIfExists('fueltype');
     }
 };
