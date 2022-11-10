@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('inventory_order', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('inventory_id');
-            $table->unsignedBigInteger('order_id');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('inventory_id');
+            $table->foreignUuid('order_id');
             $table->timestamps();
 
             //foreign key assignments

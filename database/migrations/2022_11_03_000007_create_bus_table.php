@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bus', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('company_id');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('company_id');
             $table->string("name", 30);
             $table->string("model", 50);
             $table->double("fuel_capacity");
             $table->double("storage_capacity");
-            $table->unsignedBigInteger('fueltype_id');
+            $table->foreignUuid('fueltype_id');
             $table->double("buy-in_price");
             $table->timestamps();
 

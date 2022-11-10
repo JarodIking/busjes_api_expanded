@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bus_orders', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('bus_id');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('order_id');
+            $table->foreignUuid('bus_id');
             $table->double('fuel_amount');
             $table->double('days');
             $table->double('total_price');

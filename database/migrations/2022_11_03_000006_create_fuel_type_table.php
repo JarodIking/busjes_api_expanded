@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('fueltype', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string("name", 30);
             $table->double("price");
             $table->timestamps();
