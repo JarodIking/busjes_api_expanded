@@ -25,7 +25,7 @@ return new class extends Migration
             $table->timestamps();
 
             //foreign key assignments
-            $table->foreign('country_id')->references('id')->on('country');
+            $table->foreign('country_id')->references('id')->on('countries');
         });
     }
 

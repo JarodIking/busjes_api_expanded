@@ -3,7 +3,10 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Faker\Generator as Faker;
+use Faker\Provider\nl_NL\Address;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -15,26 +18,22 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
     public function definition()
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'id' => Str::uuid(),
+            'username' => Str::random(10),
+            'password' => Hash::make(Str::random(10)),
+            'api_token' => Str::random(60),
+            'firstname' => $this->faker->firstName(),
+            'lastname' => $this->faker->lastName(),
+            'email' => 'test@test.test',
+            'province' => 'unkown',
+            'city' => $this->faker->city(),
+            'street' => $this->faker->streetName(),
+            'housenumber' => $this->faker->buildingNumber(),
+            'zipcode' => $this->faker->postcode(),
         ];
-    }
-
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return static
-     */
-    public function unverified()
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
     }
 }

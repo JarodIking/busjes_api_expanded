@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('inventory_id');
+            $table->foreignUuid('inventory_id')->nullable();
             $table->string("username", 50);
             $table->string("password", 300)->unique();
 
@@ -27,17 +27,17 @@ return new class extends Migration
             $table->string("firstname", 50);
             $table->string("lastname", 50);
             $table->string("email", 100);
-            $table->foreignUuid('country_id');
+            $table->foreignUuid('country_id')->nullable();
             $table->string("province", 50);
             $table->string("city", 50);
             $table->string("street", 50);
             $table->integer("housenumber");
-            $table->string("zipcode", 6);
+            $table->string("zipcode", 10);
 
             $table->timestamps();
 
             //foreign key assignments
-            $table->foreign('country_id')->references('id')->on('country');
+            $table->foreign('country_id')->references('id')->on('countries');
             $table->foreign( "inventory_id")->references("id")->on("inventory");
         });
     }
@@ -50,7 +50,7 @@ return new class extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('user');
+        Schema::dropIfExists('users');
         Schema::enableForeignKeyConstraints();
     }
 };
