@@ -25,7 +25,7 @@ return new class extends Migration
             $table->timestamps();
 
             //foreign key assignments
-            $table->foreign('company_id')->references('id')->on('company');
+            $table->foreign('company_id')->references('id')->on('companies');
             $table->foreign('fueltype_id')->references('id')->on('fueltype');
         });
     }
